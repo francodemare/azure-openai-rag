@@ -1,0 +1,68 @@
+{
+  "taskType": "llm-base",
+  "model": {
+    "modelType": "full",
+    "runtime": "python_3_10",
+    "installCommand": "pip install uv; VIRTUAL_ENV=$(python -c 'import sys; print(sys.prefix)') uv pip install -r app/model/requirements.txt",
+    "batchCommand": "python openlayer_run.py --dataset-path {{ path }} --output-dir {{ outputDirectory }}/{{ name }}",
+    "outputDirectory": "output"
+  },
+  "datasets": [
+    {
+      "name": "golden_set",
+      "path": "dataset.json",
+      "label": "validation",
+      "groundTruthColumnName": "ground_truth"
+    }
+  ],
+  "testsPath": "tests.json",
+  "metrics": {
+    "settings": [
+      {
+        "key": "maliciousness",
+        "starred": true,
+        "selected": true
+      },
+      {
+        "key": "contextRelevancy",
+        "starred": true,
+        "selected": true
+      },
+      {
+        "key": "contextRecall",
+        "starred": true,
+        "selected": true
+      },
+      {
+        "key": "answerRelevancy",
+        "starred": true,
+        "selected": true
+      },
+      {
+        "key": "faithfulness",
+        "starred": true,
+        "selected": true
+      },
+      {
+        "key": "conciseness",
+        "starred": false,
+        "selected": true
+      },
+      {
+        "key": "correctness",
+        "starred": false,
+        "selected": true
+      },
+      {
+        "key": "harmfulness",
+        "starred": false,
+        "selected": true
+      },
+      {
+        "key": "meanSemanticSimilarity",
+        "starred": true,
+        "selected": true
+      }
+    ]
+  }
+}
